@@ -1,25 +1,20 @@
-import React from "react";
-import "./Card.css"
+import React, { useState } from "react";
+import "./Card.css";
 
-const Card = ({code, value, suit, image}) => {
+const Card = ({ image }) => {
+  const [{ angle, randomX, randomY }] = useState({
+    angle: Math.random() * 90 - 45,
+    randomX: Math.random() * 40 - 20,
+    randomY: Math.random() * 40 - 20,
+  });
 
-    // let angle = Math.random() * 90 - 45;
-    // let randomX = Math.random() * 40 - 20;
-    // let randomY = Math.random() * 40 - 20;
-    // let styles = {
-    //     transform: `translate(${randomX}px, ${randomY}px) rotate(${angle}deg)`
+  const transform = `translate(${randomX}px, ${randomY}px) rotate(${angle}deg)`;
 
-
-    // }
-    
-
-    return (
-        // <div className="Card-div">
-        <img className="Card-img" src={image} 
-        // style={styles}
-        />
-        // </div>
-    )
+  return (
+    // <div className="Card-div">
+    <img className="Card-img" src={image} style={{transform}} />
+    // </div>
+  );
 };
 
 export default Card;
