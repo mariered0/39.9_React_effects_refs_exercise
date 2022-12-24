@@ -7,40 +7,26 @@ const Deck = () => {
     const url = 'https://deckofcardsapi.com/api/deck/'
     
     // const [deckId, setDeckId] = useState(null);
-    const [cards, setCards] = useState(null);
+    
     const deckIdRef = useRef();
     const cardRemainingRef = useRef();
-    // useEffect(() => {
-    //     axios.get(`${url}new/draw/?count=1`).then(res => {
-    //         console.log(res.data);
-    //         const {code, value, suit, image} = res.data.cards[0];
-    //         setCards([{code, value, suit, image, id:res.data.remaining }]);
-    //         deckIdRef.current = res.data.deck_id;
-    //         cardRemainingRef.current = res.data.remaining;
-    //         console.log('deckIdRef', deckIdRef);
-    // })
-    // }, [deckId]);
+    const [cards, setCards] = useState(null); 
 
     const nextCard = (newCard) => {
         axios.get(`${url}${deckIdRef.current}/draw/?count=1`).then(res => {
             const {code, value, suit, image} = res.data.cards[0];
+            console.log('res.data', res.data);
             setCards(cards => [...cards, {code, value, suit, image, id:res.data.remaining}])
             cardRemainingRef.current = res.data.remaining;
             console.log('cards:', cards);
-            console.log('deckId', deckIdRef);
-            console.log('card remaining',)
+            console.log('card remaining', cardRemainingRef.current);
         })
     }
 
-    // setTimeout(() => {
-    // if (cardRemainingRef.current === 0) {
-    //     alert('Error: no cards remaining!');
-    // }
-    // }, 1000);
-
     //Part 2
-    const [timerOn, setTimer] = useState(false);
+    // const [timerOn, setTimer] = useState(false);
     const [seconds, setSeconds] = useState(0);
+
     const timerId = useRef();
     useEffect(() => {
         //first card
@@ -49,6 +35,7 @@ const Deck = () => {
             setCards([{code, value, suit, image, id:res.data.remaining }]);
             deckIdRef.current = res.data.deck_id;
             cardRemainingRef.current = res.data.remaining;
+            console.log('card remaining', cardRemainingRef.current);
         })
         
         timerId.current = setInterval(() => {
@@ -66,9 +53,9 @@ const Deck = () => {
         clearInterval(timerId.current);
     }
 
-    const toggleButton = () => {
-        setTimer(!timerOn);
-    }
+    // const toggleButton = () => {
+    //     setTimer(!timerOn);
+    // }
 
     return (
         <div>
