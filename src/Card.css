@@ -1,0 +1,15 @@
+.Card-div {
+    width: 100%;
+    height: 800px;
+}
+
+.Card-img {
+    margin-top: 80px;
+    margin-right: auto;
+    margin-left: auto;
+    left: 0;
+    right: 0;
+    width: 350px;
+    height: 450px;
+    position: absolute;
+}
